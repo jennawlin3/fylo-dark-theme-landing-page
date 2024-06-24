@@ -131,9 +131,10 @@
           <h2>Get Started For Free</h2>
           <p>It only takes a minute to sign up and our free starter tier is extremely generous. If you have any 
             questions, our support team would be happy to help you.</p>
-          <form action="#" method="post">
-            <input type="email" name="email" id="">
-            <input type="submit" value="Get early access today">
+          <form action="#" method="post" novalidate>
+            <input type="email" name="email" required id="email" placeholder="example@mail.com">
+            <input type="submit" id="submit" value="Get early access today">
+            <div class="error-msg hide">Please enter a valid email address</div>
           </form>
         </section>
         <img src="./images/logo.svg" alt="Logo" srcset="" class="logo">
@@ -187,5 +188,6 @@
       Coded by <a href="https://www.linkedin.com/in/jenn-acosta7/">Jenn Acosta</a>.
     </p>
   </div>
+  <script src="./app/app.js"></script>
 </body>
 </html>

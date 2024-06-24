@@ -224,7 +224,6 @@ h1 {
 
 .fourth {
     padding-bottom: 300px;
-    position: relative;
 }
 
 .comment-card {
@@ -233,9 +232,11 @@ h1 {
     padding: 30px;
     margin: auto;
     margin-bottom: 30px;
+    position: relative;
+    z-index: 999;
 }
 
-.comment-card:first-of-type:after {
+.comment-card:first-of-type::before {
     content: "";
     background: url(../images/bg-quotes.png);
     width: 30px;
@@ -244,7 +245,7 @@ h1 {
     background-repeat: no-repeat;
     position: absolute;
     top: -20px;
-    z-index: 10;
+    z-index: -1;
 }
 
 .comment-card p {
@@ -317,8 +318,12 @@ input {
     font-family: "Raleway", sans-serif;
 }
 
-input[type="text"]::placeholder {
+input[type="email"]::placeholder {
     color: #ddd;
+}
+
+input[type="email"] {
+    padding-left: 20px;
 }
 
 input[type="submit"] {
@@ -331,6 +336,21 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background: #c0fffacf;
+}
+
+.error-msg {
+    margin: 10px 0;
+    color: var(--light-red);
+    text-align: start;
+    margin-left: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+input[type="email"].error {
+    border: 1px solid var(--light-red);
 }
 
 .footer-container .logo {
@@ -402,8 +422,8 @@ input[type="submit"]:hover {
 }
 
 .fa-brands:hover {
-    color: var(--white);
-    border: 1px solid var(--white);
+    color: var(--blue);
+    border: 1px solid var(--blue);
 }
 
 @media screen and (min-width:768px) {
@@ -548,10 +568,16 @@ input[type="submit"]:hover {
     .comment-card {
         margin: 0 auto;
         width: 33%;
+        transform-style: preserve-3d;
     }
 
-    .comment-card::after {
-        top: 0;
+    .comment-card:first-of-type::before {
+        top: -35px;
+        left: -10px;
+        width: 50px;
+        height: 50px;
+        z-index: -1;
+        transform: translateZ(-1px);
     }
 
     .form-container {
@@ -562,9 +588,28 @@ input[type="submit"]:hover {
     }
 
     .form-container form {
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: 60% 40%;
+        grid-template-areas: 
+        "email submit"
+        "error error";
         width: 90%;
         justify-content: center;
+        margin: auto;
+    }
+
+    input[type="email"] {
+        grid-area: email;
+        width: 100% !important;
+    }
+
+    input[type="submit"] {
+        grid-area: submit;
+        width: 100% !important;
+    }
+
+    .error-msg {
+        grid-area: error;
     }
 
     .form-container p {
@@ -580,7 +625,7 @@ input[type="submit"]:hover {
     footer {
         padding: 210px 30px 40px;
         width: 100%;
-        height: 400px;
+        height: 500px;
     }
 
     .footer-container {
@@ -590,12 +635,13 @@ input[type="submit"]:hover {
         margin: auto;
         justify-content: center;
         position: relative;
+        padding-top: 50px;
     }
 
     .footer-container .logo {
         width: 120px !important;
         position: absolute;
-        top: -60px;
+        top: -10px;
         left: 20px;
     }
 
